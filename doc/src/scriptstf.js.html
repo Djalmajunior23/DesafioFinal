@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>scriptstf.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../";
+    var thisFile = "src/scriptstf.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>scriptstf.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<p>Projeto Stars Films</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">
+<span class="hljs-keyword">const</span> API_KEY = <span class="hljs-string">'api_key=a61e6b7e377522bc7e59a96ac711d9e0'</span>;
+<span class="hljs-keyword">const</span> BASE_URL = <span class="hljs-string">'https://api.themoviedb.org/3'</span>;
+<span class="hljs-keyword">const</span> API_URL = BASE_URL + <span class="hljs-string">'/discover/movie?sort_by=popularity.desc&amp;'</span>+API_KEY;
+<span class="hljs-keyword">const</span> IMG_URL = <span class="hljs-string">'https://image.tmdb.org/t/p/w500'</span>;
+<span class="hljs-keyword">const</span> searchURL = BASE_URL + <span class="hljs-string">'/search/movie?'</span>+API_KEY;
+
+<span class="hljs-keyword">const</span> genres = [
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">28</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Action"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">12</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Adventure"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">16</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Animation"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">35</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Comedy"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">80</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Crime"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">99</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Documentary"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">18</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Drama"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">10751</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Family"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">14</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Fantasy"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">36</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"History"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">27</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Horror"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">10402</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Music"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">9648</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mystery"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">10749</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Romance"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">878</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Science Fiction"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">10770</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"TV Movie"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">53</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Thriller"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">10752</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"War"</span>
+    },
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-number">37</span>,
+      <span class="hljs-string">"name"</span>: <span class="hljs-string">"Western"</span>
+    }
+  ]
+
+<span class="hljs-keyword">const</span> main = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'main'</span>);
+<span class="hljs-keyword">const</span> form =  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'form'</span>);
+<span class="hljs-keyword">const</span> search = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'search'</span>);
+<span class="hljs-keyword">const</span> tagsEl = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'tags'</span>);
+
+<span class="hljs-keyword">const</span> prev = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'prev'</span>)
+<span class="hljs-keyword">const</span> next = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'next'</span>)
+<span class="hljs-keyword">const</span> current = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'current'</span>)
+
+<span class="hljs-keyword">var</span> currentPage = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">var</span> nextPage = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">var</span> prevPage = <span class="hljs-number">3</span>;
+<span class="hljs-keyword">var</span> lastUrl = <span class="hljs-string">''</span>;
+<span class="hljs-keyword">var</span> totalPages = <span class="hljs-number">100</span>;
+
+<span class="hljs-keyword">var</span> selectedGenre = []
+setGenre();
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setGenre</span>(<span class="hljs-params"></span>) </span>{
+    tagsEl.innerHTML= <span class="hljs-string">''</span>;
+    genres.forEach(<span class="hljs-function"><span class="hljs-params">genre</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> t = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+        t.classList.add(<span class="hljs-string">'tag'</span>);
+        t.id=genre.id;
+        t.innerText = genre.name;
+        t.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+            <span class="hljs-keyword">if</span>(selectedGenre.length == <span class="hljs-number">0</span>){
+                selectedGenre.push(genre.id);
+            }<span class="hljs-keyword">else</span>{
+                <span class="hljs-keyword">if</span>(selectedGenre.includes(genre.id)){
+                    selectedGenre.forEach(<span class="hljs-function">(<span class="hljs-params">id, idx</span>) =&gt;</span> {
+                        <span class="hljs-keyword">if</span>(id == genre.id){
+                            selectedGenre.splice(idx, <span class="hljs-number">1</span>);
+                        }
+                    })
+                }<span class="hljs-keyword">else</span>{
+                    selectedGenre.push(genre.id);
+                }
+            }
+            <span class="hljs-built_in">console</span>.log(selectedGenre)
+            getMovies(API_URL + <span class="hljs-string">'&amp;with_genres='</span>+<span class="hljs-built_in">encodeURI</span>(selectedGenre.join(<span class="hljs-string">','</span>)))
+            highlightSelection()
+        })
+        tagsEl.append(t);
+    })
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">highlightSelection</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> tags = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.tag'</span>);
+    tags.forEach(<span class="hljs-function"><span class="hljs-params">tag</span> =&gt;</span> {
+        tag.classList.remove(<span class="hljs-string">'highlight'</span>)
+    })
+    clearBtn()
+    <span class="hljs-keyword">if</span>(selectedGenre.length !=<span class="hljs-number">0</span>){   
+        selectedGenre.forEach(<span class="hljs-function"><span class="hljs-params">id</span> =&gt;</span> {
+            <span class="hljs-keyword">const</span> hightlightedTag = <span class="hljs-built_in">document</span>.getElementById(id);
+            hightlightedTag.classList.add(<span class="hljs-string">'highlight'</span>);
+        })
+    }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">clearBtn</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword">let</span> clearBtn = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'clear'</span>);
+    <span class="hljs-keyword">if</span>(clearBtn){
+        clearBtn.classList.add(<span class="hljs-string">'highlight'</span>)
+    }<span class="hljs-keyword">else</span>{
+            
+        <span class="hljs-keyword">let</span> clear = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+        clear.classList.add(<span class="hljs-string">'tag'</span>,<span class="hljs-string">'highlight'</span>);
+        clear.id = <span class="hljs-string">'clear'</span>;
+        clear.innerText = <span class="hljs-string">'Clear x'</span>;
+        clear.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+            selectedGenre = [];
+            setGenre();            
+            getMovies(API_URL);
+        })
+        tagsEl.append(clear);
+    }
+    
+}
+
+getMovies(API_URL);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getMovies</span>(<span class="hljs-params">url</span>) </span>{
+  lastUrl = url;
+    fetch(url).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json()).then(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log(data.results)
+        <span class="hljs-keyword">if</span>(data.results.length !== <span class="hljs-number">0</span>){
+            showMovies(data.results);
+            currentPage = data.page;
+            nextPage = currentPage + <span class="hljs-number">1</span>;
+            prevPage = currentPage - <span class="hljs-number">1</span>;
+            totalPages = data.total_pages;
+
+            current.innerText = currentPage;
+
+            <span class="hljs-keyword">if</span>(currentPage &lt;= <span class="hljs-number">1</span>){
+              prev.classList.add(<span class="hljs-string">'disabled'</span>);
+              next.classList.remove(<span class="hljs-string">'disabled'</span>)
+            }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(currentPage&gt;= totalPages){
+              prev.classList.remove(<span class="hljs-string">'disabled'</span>);
+              next.classList.add(<span class="hljs-string">'disabled'</span>)
+            }<span class="hljs-keyword">else</span>{
+              prev.classList.remove(<span class="hljs-string">'disabled'</span>);
+              next.classList.remove(<span class="hljs-string">'disabled'</span>)
+            }
+
+            tagsEl.scrollIntoView({<span class="hljs-attr">behavior</span> : <span class="hljs-string">'smooth'</span>})
+
+        }<span class="hljs-keyword">else</span>{
+            main.innerHTML= <span class="hljs-string">`&lt;h1 class="no-results"&gt;No Results Found&lt;/h1&gt;`</span>
+        }
+       
+    })
+
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showMovies</span>(<span class="hljs-params">data</span>) </span>{
+    main.innerHTML = <span class="hljs-string">''</span>;
+
+    data.forEach(<span class="hljs-function"><span class="hljs-params">movie</span> =&gt;</span> {
+        <span class="hljs-keyword">const</span> {title, poster_path, vote_average, overview, id} = movie;
+        <span class="hljs-keyword">const</span> movieEl = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>);
+        movieEl.classList.add(<span class="hljs-string">'movie'</span>);
+        movieEl.innerHTML = <span class="hljs-string">`
+             &lt;img src="<span class="hljs-subst">${poster_path? IMG_URL+poster_path: <span class="hljs-string">"http://via.placeholder.com/1080x1580"</span> }</span>" alt="<span class="hljs-subst">${title}</span>"&gt;
+            &lt;div class="movie-info"&gt;
+                &lt;h3&gt;<span class="hljs-subst">${title}</span>&lt;/h3&gt;
+                &lt;span class="<span class="hljs-subst">${getColor(vote_average)}</span>"&gt;<span class="hljs-subst">${vote_average}</span>&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="overview"&gt;
+                &lt;h3&gt;Overview&lt;/h3&gt;
+                <span class="hljs-subst">${overview}</span>
+                &lt;br/&gt; 
+                &lt;button class="know-more" id="<span class="hljs-subst">${id}</span>"&gt;Know More&lt;/button
+            &lt;/div&gt;
+        
+        `</span>
+
+        main.appendChild(movieEl);
+
+        <span class="hljs-built_in">document</span>.getElementById(id).addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+          <span class="hljs-built_in">console</span>.log(id)
+          openNav(movie)
+        })
+    })
+}
+
+<span class="hljs-keyword">const</span> overlayContent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'overlay-content'</span>);
+<span class="hljs-comment">/* Open when someone clicks on the span element */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">openNav</span>(<span class="hljs-params">movie</span>) </span>{
+  <span class="hljs-keyword">let</span> id = movie.id;
+  fetch(BASE_URL + <span class="hljs-string">'/movie/'</span>+id+<span class="hljs-string">'/videos?'</span>+API_KEY).then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json()).then(<span class="hljs-function"><span class="hljs-params">videoData</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(videoData);
+    <span class="hljs-keyword">if</span>(videoData){
+      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myNav"</span>).style.width = <span class="hljs-string">"100%"</span>;
+      <span class="hljs-keyword">if</span>(videoData.results.length &gt; <span class="hljs-number">0</span>){
+        <span class="hljs-keyword">var</span> embed = [];
+        <span class="hljs-keyword">var</span> dots = [];
+        videoData.results.forEach(<span class="hljs-function">(<span class="hljs-params">video, idx</span>) =&gt;</span> {
+          <span class="hljs-keyword">let</span> {name, key, site} = video
+
+          <span class="hljs-keyword">if</span>(site == <span class="hljs-string">'YouTube'</span>){
+              
+            embed.push(<span class="hljs-string">`
+              &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/<span class="hljs-subst">${key}</span>" title="<span class="hljs-subst">${name}</span>" class="embed hide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+          
+          `</span>)
+
+            dots.push(<span class="hljs-string">`
+              &lt;span class="dot"&gt;<span class="hljs-subst">${idx + <span class="hljs-number">1</span>}</span>&lt;/span&gt;
+            `</span>)
+          }
+        })
+        
+        <span class="hljs-keyword">var</span> content = <span class="hljs-string">`
+        &lt;h1 class="no-results"&gt;<span class="hljs-subst">${movie.original_title}</span>&lt;/h1&gt;
+        &lt;br/&gt;
+        
+        <span class="hljs-subst">${embed.join(<span class="hljs-string">''</span>)}</span>
+        &lt;br/&gt;
+        &lt;div class="dots"&gt;<span class="hljs-subst">${dots.join(<span class="hljs-string">''</span>)}</span>&lt;/div&gt;
+        
+        `</span>
+        overlayContent.innerHTML = content;
+        activeSlide=<span class="hljs-number">0</span>;
+        showVideos();
+      }<span class="hljs-keyword">else</span>{
+        overlayContent.innerHTML = <span class="hljs-string">`&lt;h1 class="no-results"&gt;No Results Found&lt;/h1&gt;`</span>
+      }
+    }
+  })
+}
+
+<span class="hljs-comment">/* Close when someone clicks on the "x" symbol inside the overlay */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">closeNav</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myNav"</span>).style.width = <span class="hljs-string">"0%"</span>;
+}
+
+<span class="hljs-keyword">var</span> activeSlide = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> totalVideos = <span class="hljs-number">0</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showVideos</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> embedClasses = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.embed'</span>);
+  <span class="hljs-keyword">let</span> dots = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'.dot'</span>);
+
+  totalVideos = embedClasses.length; 
+  embedClasses.forEach(<span class="hljs-function">(<span class="hljs-params">embedTag, idx</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span>(activeSlide == idx){
+      embedTag.classList.add(<span class="hljs-string">'show'</span>)
+      embedTag.classList.remove(<span class="hljs-string">'hide'</span>)
+
+    }<span class="hljs-keyword">else</span>{
+      embedTag.classList.add(<span class="hljs-string">'hide'</span>);
+      embedTag.classList.remove(<span class="hljs-string">'show'</span>)
+    }
+  })
+
+  dots.forEach(<span class="hljs-function">(<span class="hljs-params">dot, indx</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span>(activeSlide == indx){
+      dot.classList.add(<span class="hljs-string">'active'</span>);
+    }<span class="hljs-keyword">else</span>{
+      dot.classList.remove(<span class="hljs-string">'active'</span>)
+    }
+  })
+}
+
+<span class="hljs-keyword">const</span> leftArrow = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'left-arrow'</span>)
+<span class="hljs-keyword">const</span> rightArrow = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'right-arrow'</span>)
+
+leftArrow.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  <span class="hljs-keyword">if</span>(activeSlide &gt; <span class="hljs-number">0</span>){
+    activeSlide--;
+  }<span class="hljs-keyword">else</span>{
+    activeSlide = totalVideos <span class="hljs-number">-1</span>;
+  }
+
+  showVideos()
+})
+
+rightArrow.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  <span class="hljs-keyword">if</span>(activeSlide &lt; (totalVideos <span class="hljs-number">-1</span>)){
+    activeSlide++;
+  }<span class="hljs-keyword">else</span>{
+    activeSlide = <span class="hljs-number">0</span>;
+  }
+  showVideos()
+})
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getColor</span>(<span class="hljs-params">vote</span>) </span>{
+    <span class="hljs-keyword">if</span>(vote&gt;= <span class="hljs-number">8</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'green'</span>
+    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(vote &gt;= <span class="hljs-number">5</span>){
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"orange"</span>
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-string">'red'</span>
+    }
+}
+
+form.addEventListener(<span class="hljs-string">'submit'</span>, (e) =&gt; {
+    e.preventDefault();
+
+    <span class="hljs-keyword">const</span> searchTerm = search.value;
+    selectedGenre=[];
+    setGenre();
+    <span class="hljs-keyword">if</span>(searchTerm) {
+        getMovies(searchURL+<span class="hljs-string">'&amp;query='</span>+searchTerm)
+    }<span class="hljs-keyword">else</span>{
+        getMovies(API_URL);
+    }
+
+})
+
+prev.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  <span class="hljs-keyword">if</span>(prevPage &gt; <span class="hljs-number">0</span>){
+    pageCall(prevPage);
+  }
+})
+
+next.addEventListener(<span class="hljs-string">'click'</span>, () =&gt; {
+  <span class="hljs-keyword">if</span>(nextPage &lt;= totalPages){
+    pageCall(nextPage);
+  }
+})
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pageCall</span>(<span class="hljs-params">page</span>)</span>{
+  <span class="hljs-keyword">let</span> urlSplit = lastUrl.split(<span class="hljs-string">'?'</span>);
+  <span class="hljs-keyword">let</span> queryParams = urlSplit[<span class="hljs-number">1</span>].split(<span class="hljs-string">'&amp;'</span>);
+  <span class="hljs-keyword">let</span> key = queryParams[queryParams.length <span class="hljs-number">-1</span>].split(<span class="hljs-string">'='</span>);
+  <span class="hljs-keyword">if</span>(key[<span class="hljs-number">0</span>] != <span class="hljs-string">'page'</span>){
+    <span class="hljs-keyword">let</span> url = lastUrl + <span class="hljs-string">'&amp;page='</span>+page
+    getMovies(url);
+  }<span class="hljs-keyword">else</span>{
+    key[<span class="hljs-number">1</span>] = page.toString();
+    <span class="hljs-keyword">let</span> a = key.join(<span class="hljs-string">'='</span>);
+    queryParams[queryParams.length <span class="hljs-number">-1</span>] = a;
+    <span class="hljs-keyword">let</span> b = queryParams.join(<span class="hljs-string">'&amp;'</span>);
+    <span class="hljs-keyword">let</span> url = urlSplit[<span class="hljs-number">0</span>] +<span class="hljs-string">'?'</span>+ b
+    getMovies(url);
+  }
+}
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
