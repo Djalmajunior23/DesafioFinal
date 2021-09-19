@@ -1,5 +1,6 @@
+"use strict";
 
-module.exports=({
+module.exports = {
   client: 'mysql',
   connection: {
     host: '127.0.0.1',
@@ -8,4 +9,4 @@ module.exports=({
     password: 'DGj1107!',
     database: 'Movies'
   }
-});
+};

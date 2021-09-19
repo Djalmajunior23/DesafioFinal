@@ -1,8 +1,10 @@
 require('dotenv/config');
+
+
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const film = require('./src/film.js');
+const film = require('./src/server.js');
 app.use(cors())
 
 
@@ -13,7 +15,9 @@ app.get('/trending', async(req, res) => {
     } else {
         res.status(200).send(filme)
     }    
-}) 
+})
+
+
 
 
 app.listen(3003, function(){
