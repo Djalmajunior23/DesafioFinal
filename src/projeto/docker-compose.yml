@@ -1,0 +1,22 @@
+
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src/projeto
+    netoworks: 
+      -app-network
+
+mysql-app: 
+  image: mysql 8.0
+  ports: 
+    -"3306:3306"
+  environment: :
+    MYSQL_DATABASE: filmes
+    MYSQL_ROOT_PASSWORD: Films
+  netoweks: 
+    - app-network 
+
+networks: 
+  app-network: 
+    driver:bridge
