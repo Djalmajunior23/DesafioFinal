@@ -2,12 +2,12 @@ require('dotenv/config');
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const films = require('./src/projeto/films.js');
+const film = require('./src/film.js');
 app.use(cors())
 
 
 app.get('/trending', async(req, res) => {
-    const filme = await films.getTrending()
+    const filme = await film.getTrending()
     if (filme == undefined) {
         res.status(400).send()
     } else {
