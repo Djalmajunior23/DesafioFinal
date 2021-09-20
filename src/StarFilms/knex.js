@@ -1,4 +1,3 @@
-
 module.exports=({
   client: 'mysql',
   connection: {
@@ -9,3 +8,16 @@ module.exports=({
     database: 'Movies'
   }
 });
+
+knex.schema.withSchema('public').createTable('users', function (table) {
+  table.increments();
+});
+
+knex.schema.createTable('users', function (table) {
+  id.increments();
+  nome_filme.string('name');
+  table.descrição();
+});
+
+
+
